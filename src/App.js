@@ -1,10 +1,10 @@
 import "./App.css";
-import StudentDashboard from "./view/studentDashboard.js";
+import HospitalDashboard from "./view/hospitalDashboard.js";
 
 const App = () => {
   return (
     <div className="App">
-      <StudentDashboard />
+      <HospitalDashboard />
     </div>
   );
 };
