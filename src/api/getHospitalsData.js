@@ -7,7 +7,7 @@ export const GetHospitalsData = () => {
 
   useEffect(() => {
     Tabletop.init({
-      key: process.env.REACT_APP_GSS_KEY,
+      key: process.env.REACT_APP_GSS_KEY ,
       simpleSheet: true,
     })
       .then((data) => setHospitalsData(data))
