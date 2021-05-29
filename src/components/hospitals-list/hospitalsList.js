@@ -5,31 +5,13 @@ import "./hospitalsList.css";
 const HospitalsList = () => {
   const hospitalsData = GetHospitalsData();
   const [searchHospital, setSearchHospital] = useState("");
-  
 
-  // const updatedTime = () =>{
-  //   const currentDate = new Date()
-  //   const currentTime = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-  //   // console.log(currentTime);
-  //   hospitalsData.map((item, key)=> {
-  //     console.log(item.Timestamp)
-  //     console.log(parseInt((item.Timestamp).slice(11, 13)))
-  //     parseInt((item.Timestamp).slice(11, 13)) 
-  //   }) 
-  //   // parseInt((.Timestamp).slice(11, 13))
-  // }
-  // updatedTime()
-  const currentDate = new Date()
-  console.log( currentDate.getDate());
-  const currentHour = currentDate.getHours()
-  console.log(currentHour) ;
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
 
   return (
-
     <div className="hospital-dashboard">
-      <div className="test-message">        
-      </div>
-
+      <div className="test-message"></div>
 
       <div className="hospitals-list">
         <div className="hospitals-list-header-component">
@@ -38,7 +20,7 @@ const HospitalsList = () => {
           <input
             className="hospitals-list-search-box"
             type="text"
-            placeholder="Search hospital"
+            placeholder="Search Hospital, City, Address..."
             onChange={(e) => setSearchHospital(e.target.value)}
           />
         </div>
@@ -48,8 +30,12 @@ const HospitalsList = () => {
               return item;
             } else if (
               item.City.toLowerCase().includes(searchHospital.toLowerCase()) ||
-              item.Hospital_Name.toLowerCase().includes(searchHospital.toLowerCase()) ||
-              item.Hospital_Address.toLowerCase().includes(searchHospital.toLowerCase())
+              item.Hospital_Name.toLowerCase().includes(
+                searchHospital.toLowerCase()
+              ) ||
+              item.Hospital_Address.toLowerCase().includes(
+                searchHospital.toLowerCase()
+              )
             ) {
               return item;
             }
@@ -57,50 +43,41 @@ const HospitalsList = () => {
           })
           .map((item, key) => {
             return (
+              
               <div key={key} class="no-bullets">
-
-                <li>City - {item.City} </li>
+                
+                <li >City - {item.City}</li>                
                 <li className="name">
-                  <h4>Name - {item.Hospital_Name}</h4>
-                <p>Updated Date -{(item.Timestamp).slice(0, 10)}</p>
-                <p>Updated Time - {((item.Timestamp).slice(11, 19))}</p>
-                 </li>
-                <li className="address">
-                  <h3>Address<br></br> - {item.Hospital_Address}</h3>
+                  <h4>Name - <span>{item.Hospital_Name}</span></h4>
+                  <p> Updated - {currentDate.getDate() === parseInt((item.Timestamp).slice(0, 2)) ? <> {Math.abs(currentHour - parseInt((item.Timestamp).slice(11, 13))) === 0 || Math.abs(currentHour - parseInt((item.Timestamp).slice(11, 13))) === 1 ? <>{"1 hour ago"}</>: <>{Math.abs(currentHour - parseInt((item.Timestamp).slice(11, 13))) + " hours ago"}</>}  </> : <>{ currentDate.getDate() - parseInt((item.Timestamp).slice(0, 2)) === 1 ? <>{currentDate.getDate() - parseInt((item.Timestamp).slice(0, 2)) + " day ago"}</> : <>{currentDate.getDate() - parseInt((item.Timestamp).slice(0, 2)) + " days ago"}</>}</>  }</p>
                 </li>
-                <li className="phone">Phone - <span className="inner" >{item.Hospital_Phone_Number}</span></li>
-                                                
-                <li>Bed - {item.Bed_Availability}</li>
-                <li>Oxygen -{item.Oxygen_Availability}</li>
-                <li>Ventilator - {item.Ventilator_Availability}</li>
-
-                 <li><b>{item.Hospital_Name}</b></li>
-                 <li><b>City - </b>{item.City} </li>
-                 <li><b>Address -  </b>{item.Hospital_Address}</li>
-                 <li><b>Phone Number - </b>{item.Hospital_Phone_Number}</li>
-                 <li><b>Bed Availability - </b>{item.Bed_Availability}</li>
-                 <li><b>Oxygen Availability - </b>{item.Oxygen_Availability}</li>
-                 <li><b>Ventilator Availability - </b>{item.Ventilator_Availability}</li>
-                 <li><b>Updated Date - </b>{(item.Timestamp).slice(0, 10)}</li>
-                 <li><b>Updated Time - </b>{((item.Timestamp).slice(11, 19))}</li>
-
+                <li className="address">
+                  <h3>
+                    Address - <br></br> <span>{item.Hospital_Address}</span>
+                  </h3>
+                </li>
+                <li className="phone">
+                  Phone - {" "}
+                  <span className="inner">{item.Hospital_Phone_Number}</span>
+                </li>
+                <li>Bed - {item.Bed_Availability === 'Available' ? <li className="no-bullets_available"> {item.Bed_Availability} </li> : item.Bed_Availability === 'Unavailable' ? <li className="no-bullets_unavailable"> {item.Bed_Availability} </li> : item.Bed_Availability === 'Unknown' ? <li className="no-bullets_unknown"> {item.Bed_Availability} </li> : "-"} </li>
+                <li>Oxygen  - {item.Oxygen_Availability === 'Available' ? <li className="no-bullets_available"> {item.Oxygen_Availability} </li> : item.Oxygen_Availability === 'Unavailable' ? <li className="no-bullets_unavailable"> {item.Oxygen_Availability} </li> : item.Oxygen_Availability === 'Unknown' ? <li className="no-bullets_unknown"> {item.Oxygen_Availability} </li> : "-"}</li>
+                <li>Ventilator  - {item.Ventilator_Availability === 'Available' ? <li className="no-bullets_available"> {item.Ventilator_Availability} </li> : item.Ventilator_Availability === 'Unavailable' ? <li className="no-bullets_unavailable"> {item.Ventilator_Availability} </li> : item.Ventilator_Availability === 'Unknown' ? <li className="no-bullets_unknown"> {item.Ventilator_Availability} </li> : "-"}</li>
+               
                 <br />
               </div>
             );
           })}
 
-          <footer>
-            <p>know more about - <a href="#!"> Tahaan</a></p>
-          </footer>
+        <footer>
+          <p>
+            know more about - <a href="#!"> Tahaan</a>
+          </p>
+        </footer>
 
         <div />
-
-
-          </div>
       </div>
-
+    </div>
   );
-;
-        }
+};
 export default HospitalsList;
-
