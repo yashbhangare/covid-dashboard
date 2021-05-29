@@ -19,6 +19,16 @@ body {
   list-style-type: none;
 }
 
+.no-bullets_yes{
+  color: green;
+}
+.no-bullets_no{
+  color:red;
+}
+.no-bullets_unknown{
+  color: brown;
+}
+
 .no-bullets {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
