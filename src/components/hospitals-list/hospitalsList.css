@@ -28,7 +28,6 @@ body {
 }
 .no-bullets li {
   font-weight: 500;
-  cursor: pointer;
   text-transform: uppercase;
 }
 .no-bullets li {
@@ -78,6 +77,7 @@ body {
 .no-bullets:hover {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    cursor: pointer;
 }
 .hospitals-list {
   display: flex;
